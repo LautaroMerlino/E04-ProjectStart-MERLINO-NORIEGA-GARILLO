@@ -63,3 +63,45 @@ build/
 CMakeFiles/
 cmake_install.cmake
 CMakeCache.txt
+
+# IDEs y Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+env/
+venv/
+ENV/
+.env
+*.egg-info/
+dist/
+*.egg
+
+# Dependencias
+node_modules/
+package-lock.json
+yarn.lock
+
+# Archivos temporales
+*.tmp
+*.temp
+*.bak
+*.log
+*.swp
+
+# Sistema operativo
+Thumbs.db
+
+# Firmware específico
+*.sym
+*.lst
