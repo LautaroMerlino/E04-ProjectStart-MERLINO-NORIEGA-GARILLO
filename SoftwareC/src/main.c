@@ -10,13 +10,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include menu.h
-
+#include "menuState.h"
 
 int main() 
 {
     char letter = ' ';
     //Seccion de inicializacion
     menuUpdate();
+    menuStateInit();
 
     //Loop infinito
     while (1)
@@ -36,6 +37,7 @@ int main()
         //Si se presiona otra tecla
         //pasar el carácter correspondiente como parámetro a la función void menuUpdate(char);
         menuUpdate(letter);
+        menuStateUpdate(letter);
     }
 
 
