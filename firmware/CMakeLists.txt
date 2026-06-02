@@ -20,7 +20,9 @@ add_subdirectory(keyboard)
 add_subdirectory(menu)
 
 # Crear ejecutable principal (placeholder - se actualizará según el microcontrolador)
+# Para compilación actual, linkear las librerías creadas
 # add_executable(firmware.elf main.c)
+# target_link_libraries(firmware.elf keyboard menu)
 
 # Generar archivos HEX y BIN (opcional, para flashing a microcontrolador)
 # add_custom_command(TARGET firmware.elf POST_BUILD
@@ -29,3 +31,6 @@ add_subdirectory(menu)
 # )
 
 message(STATUS "Firmware project configured successfully")
+message(STATUS "  - Keyboard module: READY")
+message(STATUS "  - Menu module: READY")
+
