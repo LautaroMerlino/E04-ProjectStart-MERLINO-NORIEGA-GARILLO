@@ -105,3 +105,18 @@ Thumbs.db
 # Firmware específico
 *.sym
 *.lst
+*.s
+*.asm
+*.mak
+*.debug
+.cppcheck
+.clangd
+
+# Herramientas de compilación y análisis
+compile_commands.json
+*.sconsign.dblite
+.scons/
+
+# Archivos de simulación
+*.vvp
+*.vcd
