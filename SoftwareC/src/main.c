@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include menu.h
 #include "menuState.h"
+#include "serial.h"
 
 int main() 
 {
@@ -18,6 +19,7 @@ int main()
     //Seccion de inicializacion
     menuUpdate();
     menuStateInit();
+    serialInit();
 
     //Loop infinito
     while (1)
