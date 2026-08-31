@@ -54,7 +54,8 @@ dkms.conf
 # debug information files
 *.dwo
 
-documentacion/Actividad_1
+# Documentación local / archivos no versionables
+Documentacion/
 .github/copilot-instructions.md
 
 # PlatformIO
@@ -64,9 +65,15 @@ documentacion/Actividad_1
 
 # CMake
 build/
+cmake-build*/
 CMakeFiles/
 cmake_install.cmake
 CMakeCache.txt
+Testing/
+
+# Archivos de compilación / análisis
+*.gcda
+*.gcno
 
 # IDEs y Editores
 .vscode/
