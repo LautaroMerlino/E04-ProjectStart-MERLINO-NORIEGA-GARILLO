@@ -10,7 +10,7 @@
 
 void menuInit(void){
     //Seccion de configuración
-printf("esta es la seccion de configuración");
+printf("esta es la seccion de configuracion");
 }
 
 void menuUpdate(char letter){

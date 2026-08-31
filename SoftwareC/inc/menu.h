@@ -45,14 +45,16 @@
 
 
 /**
- * @brief funcion para la configuracion del menu
+ * @brief Prototipo funcion inicializacion menu de usuario
  */
  void menuInit(void);
+
+
 /**
- * @brief Funcion para imprimir la letra seleccionada en pantalla
+ * @brief Prototipo funcion para imprimir la letra seleccionada en pantalla
  * 
  * @param letter  
  */
  void menuUpdate(char letter);
 
- #endif MENU_H
+ #endif  //Cierra el #ifndef MENU_H
