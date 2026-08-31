@@ -53,3 +53,81 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# Documentación local / archivos no versionables
+Documentacion/
+.github/copilot-instructions.md
+
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# CMake
+build/
+cmake-build*/
+CMakeFiles/
+cmake_install.cmake
+CMakeCache.txt
+Testing/
+
+# Archivos de compilación / análisis
+*.gcda
+*.gcno
+
+# IDEs y Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+env/
+venv/
+ENV/
+.env
+*.egg-info/
+dist/
+*.egg
+
+# Dependencias
+node_modules/
+package-lock.json
+yarn.lock
+
+# Archivos temporales
+*.tmp
+*.temp
+*.bak
+*.log
+*.swp
+
+# Sistema operativo
+Thumbs.db
+
+# Firmware específico
+*.sym
+*.lst
+*.s
+*.asm
+*.mak
+*.debug
+.cppcheck
+.clangd
+
+# Herramientas de compilación y análisis
+compile_commands.json
+*.sconsign.dblite
+.scons/
+
+# Archivos de simulación
+*.vvp
+*.vcd
