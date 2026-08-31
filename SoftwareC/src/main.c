@@ -9,35 +9,36 @@
 @copyright Copyright (c) 2026
 #include <stdio.h>
 #include <stdlib.h>
-#include menu.h
-#include "menuState.h"
+#include <conio.h>
+#include "../inc/menu.h"
 
 int main() 
-{
-    char letter = ' ';
-    //Seccion de inicializacion
-    menuUpdate();
-    menuStateInit();
+{    //Seccion de inicializacion oconfigurancion
+    char InputChar=' ';
+    menuInit();
+    printf("Presione una tecla (para salir presione ESC):\n");
 
-    //Loop infinito
     while (1)
-    {
-        //Leer entrada de teclado
-        letter = getchar();
-
+    {//seccion loop infinito
+        /**@brief En la seccion loop infinito esta leyendo la entrada del caracter de la consola si hacer uso del buffer del teclado
+         * por eso el uso de la libreria <conio.h> y la funcion getch (al usar getchar() no leia el ESC por el enter
+         * y se mantenia en loop).
+         */
+        InputChar = getch();
+        printf("%c\n", InputChar);
         //Si se presiona escape
-        if (letter == 27) 
+        if (InputChar == 27) 
         {
             //Salir del programa
             break;
         }
-        
-
-
-        //Si se presiona otra tecla
-        //pasar el carácter correspondiente como parámetro a la función void menuUpdate(char);
-        menuUpdate(letter);
-        menuStateUpdate(letter);
+        if(InputChar == '\n'){
+continue;
+        }
+        else{
+            //pasar el carácter correspondiente como parámetro a la función void menuUpdate(char);
+            menuUpdate(InputChar);
+        }
     }
 
 
