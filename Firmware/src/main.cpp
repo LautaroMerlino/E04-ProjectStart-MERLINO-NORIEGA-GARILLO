@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include "Keypad.h"
+#include "menu.h"
 
 // put function declarations here:
 int myFunction(int, int);
