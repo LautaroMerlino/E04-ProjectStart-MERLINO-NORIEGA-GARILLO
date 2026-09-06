@@ -1,14 +1,17 @@
 #include <Arduino.h>
-#include "uart.h"
+#include "..\inc\uart.h"
 
-#define BAUD_RATE 9600
+#define LED_BUILTIN
 
 void uartInit(void) {
-    Serial.begin(BAUD_RATE);
+    Serial.begin(115200); //inicializa el puerto serie a 115200 baudios
+    pinmode(LED, OUTPUT); 
+    digitalWrite(Led, LOW);
 }
 
 void uartRead(void) {
-    if (Serial.available() > 0) {
+    if (Serial.available() > 0) 
+    {
         char command = Serial.read();
         
         if (command == 'E') {

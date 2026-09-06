@@ -9,6 +9,9 @@ void setup() {
   initKebpoard();
   //init de MEF de menu
   initMenu();
+
+
+  
 }
 
 void loop() {
