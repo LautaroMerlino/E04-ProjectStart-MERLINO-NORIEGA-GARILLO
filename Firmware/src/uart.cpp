@@ -17,6 +17,9 @@ void uartRead(void) {
         } else if (command == 'A') {
             digitalWrite(LED_BUILTIN, LOW);
             Serial.println("OK");
+        } else if (command == 'T') {
+            float temp = sensorTemperaturaLeer();
+            sensorTemperaturaEnviar(temp);
         } else {
             Serial.println("ERROR");
         }
