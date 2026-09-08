@@ -1,17 +1,21 @@
 #include <Arduino.h>
-#include "keyboard.h"
-#include "menu.h"
+#include "..\include\keypad.h"
+#include "..\include\menu.h"
+#include "..\include\uart.h"
+#include "..\include\SensorHumedad.h"
+
+
+
 // put function declarations here:
 int myFunction(int, int);
 
 void setup() {
   //init de MAQUINAS DE ESTADOS Keypad
-  initKebpoard();
+  initKeyboard();
   //init de MEF de menu
   initMenu();
 
-
-  
+  uartInit();
 }
 
 void loop() {
@@ -20,8 +24,13 @@ void loop() {
   //actualizacion de MEF de menu
   updateMenu(button);
 
+  uartRead();
+
+  float humidityVoltage = SensorHRead();
+  Serial.println(humidityVoltage);
+  PWMWrite(humidityVoltage);
   //otras actividades no bloqueantes
-  delay(50);
+  delay(1);
 }
 
 // put function definitions here:

@@ -1,21 +1,23 @@
 #include <Arduino.h>
-#include "..\inc\uart.h"
+#include "..\include\uart.h"
+#include "..\inc\SensorHumedad.h"
 
-#define LED_BUILTIN
+#define BAUD_RATE 9600
 
 void uartInit(void) {
-    Serial.begin(115200); //inicializa el puerto serie a 115200 baudios
-    pinmode(LED, OUTPUT); 
-    digitalWrite(Led, LOW);
+    Serial.begin(BAUD_RATE);    
 }
 
 void uartRead(void) {
-    if (Serial.available() > 0) 
-    {
+float humidityVoltage = SensorHRead();
+
+    if (Serial.available() > 0) {
         char command = Serial.read();
         
         if (command == 'E') {
             digitalWrite(LED_BUILTIN, HIGH);
+            Serial.println("voltaje sensor humedad: " + String(humidityVoltage) + " V");
+            Serial.println("Valores de PWM correspondientes: " + String((humidityVoltage * 255.0) / 3.3));
             Serial.println("OK");
         } else if (command == 'A') {
             digitalWrite(LED_BUILTIN, LOW);
