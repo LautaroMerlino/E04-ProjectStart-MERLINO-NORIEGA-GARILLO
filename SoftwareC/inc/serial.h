@@ -6,5 +6,6 @@
 void serialInit(void);
 void serialSendCommand(char command);
 void serialReadAndPrint(void);
+void serialRequestSensor(void);
 
 #endif

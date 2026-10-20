@@ -27,3 +27,8 @@ void serialReadAndPrint(void) {
         printf("Respuesta: %s\n", (char*)buf);
     }
 }
+
+void serialRequestSensor(void) {
+    serialSendCommand('L');
+    serialReadAndPrint();
+}

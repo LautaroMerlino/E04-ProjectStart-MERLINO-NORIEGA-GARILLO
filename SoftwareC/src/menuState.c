@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "menuState.h"
+#include "Sensores.h"
 
 static MenuState currentState = STATE_INIT;
 
@@ -20,7 +21,7 @@ void menuStateUpdate(char letter) {
         case STATE_ESPERA:
             if (letter == '1') {
                 currentState = STATE_LEER_SENSORES;
-                printf("Leyendo sensores...\n");
+                sensoresRequestValue();
                 currentState = STATE_ESPERA;
             } else if (letter == '2') {
                 currentState = STATE_ACTIVAR_LEDS;
