@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "serial.h"
 
-#define PORT_NUMBER 0    // COM1
+2#define PORT_NUMBER 3    // COM1
 #define BAUD_RATE   9600
 
 void serialInit(void) {
