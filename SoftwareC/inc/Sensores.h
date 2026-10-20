@@ -3,7 +3,7 @@
 
 #include "serial.h"
 
-void sensores_Init(void);
-void sensoresRequestValues(void);
+void sensoresInit(void);
+void sensoresRequestValue(void);
 
-#endif    
+#endif

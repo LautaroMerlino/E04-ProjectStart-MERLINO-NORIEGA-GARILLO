@@ -30,6 +30,7 @@ void menuStateUpdate(char letter) {
             } else if (letter == '3') {
                 currentState = STATE_DATOS_USUARIO;
                 printf("Datos de usuario...\n");
+                currentState = STATE_ESPERA;
             } else if (letter == '4') {
                 currentState = STATE_ENCENDER_LED;
                 serialSendCommand('E');
