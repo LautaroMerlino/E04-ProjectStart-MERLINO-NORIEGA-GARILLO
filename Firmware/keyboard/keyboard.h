@@ -49,16 +49,16 @@ typedef enum {
  * @enum KeyCode
  * @brief Key codes for 4x4 matrix keyboard
  * Layout:
- *  1  2  3  A
- *  4  5  6  B
- *  7  8  9  C
- *  *  0  #  D
+ *  S1  S2  S3  S4
+ *  S5  S6  S7  S8
+ *  S9  S10 S11 S12
+ *  S13 S14 S15 S16
  */
 typedef enum {
-    KEY_1 = 1,   KEY_2 = 2,   KEY_3 = 3,   KEY_A = 10,
-    KEY_4 = 4,   KEY_5 = 5,   KEY_6 = 6,   KEY_B = 11,
-    KEY_7 = 7,   KEY_8 = 8,   KEY_9 = 9,   KEY_C = 12,
-    KEY_STAR = 14, KEY_0 = 0, KEY_HASH = 15, KEY_D = 13,
+    KEY_S1 = 1,   KEY_S2 = 2,   KEY_S3 = 3,   KEY_S4 = 4,
+    KEY_S5 = 5,   KEY_S6 = 6,   KEY_S7 = 7,   KEY_S8 = 8,
+    KEY_S9 = 9,   KEY_S10 = 10,   KEY_S11 = 11,   KEY_S12 = 12,
+    KEY_S13 = 13,   KEY_S14 = 14,   KEY_S15 = 15,   KEY_S16 = 16,
     KEY_NONE = 0xFF  /**< No key pressed */
 } KeyCode_t;
 
