@@ -1,0 +1,59 @@
+name: CI Build
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    name: Compilar firmware y software
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Instalar herramientas de compilación
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential gcc g++ make
+
+      - name: Compilar SoftwareC (si existe)
+        run: |
+          if [ -d SoftwareC/src ]; then
+            echo "Compilando SoftwareC/src/main.c"
+            gcc -Wall -Wextra -Werror -ISoftwareC/inc -o software_main SoftwareC/src/main.c
+          else
+            echo "SoftwareC/src no existe, se omite compilación de software"
+          fi
+
+      - name: Compilar Firmware (si existe)
+        run: |
+          if [ -d Firmware/src ]; then
+            shopt -s nullglob
+            files=(Firmware/src/*.cpp Firmware/src/*.c)
+            if [ ${#files[@]} -eq 0 ]; then
+              echo "No hay fuentes detectadas en Firmware/src, se omite compilación de firmware"
+              exit 0
+            fi
+            for source in "${files[@]}"; do
+              echo "Compilando $source"
+              if [[ "$source" == *.cpp ]]; then
+                g++ -Wall -Wextra -Werror -IFirmware/include -o firmware_main "$source"
+              else
+                gcc -Wall -Wextra -Werror -IFirmware/include -o firmware_main "$source"
+              fi
+            done
+          else
+            echo "Firmware/src no existe, se omite compilación de firmware"
+          fi
+
+      - name: Compilar fuentes locales adicionales
+        run: |
+          if [ -f dev2.c ]; then
+            gcc -Wall -Wextra -Werror -o dev2 dev2.c
+          fi
+          if [ -f src/menu.c ]; then
+            gcc -Wall -Wextra -Werror -Iinc -o menu src/menu.c
+          fi

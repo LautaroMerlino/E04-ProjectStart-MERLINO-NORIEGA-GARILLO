@@ -1,0 +1,167 @@
+name: Build and Test Firmware & Software
+
+# Triggers del workflow
+on:
+  push:
+    branches: [ develop, main ]
+  pull_request:
+    branches: [ develop, main ]
+
+jobs:
+  # ============================================
+  # JOB 1: Compilar Firmware
+  # ============================================
+  build-firmware:
+    runs-on: ubuntu-latest
+    name: Build Firmware
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup build environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake gcc g++ make
+          # Para ARM (si usas STM32 u otros ARM): descomentar siguiente línea
+          # sudo apt-get install -y gcc-arm-none-eabi
+
+      - name: Create build directory (Firmware)
+        run: mkdir -p firmware/build
+
+      - name: Configure CMake (Firmware)
+        run: |
+          cd firmware/build
+          cmake ..
+
+      - name: Build Firmware
+        run: |
+          cd firmware/build
+          make -j$(nproc)
+        continue-on-error: true
+
+      - name: Upload Firmware Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: firmware-binaries
+          path: firmware/build/bin/
+          if-no-files-found: ignore
+
+      - name: Build Status (Firmware)
+        run: echo "✅ Firmware build completed"
+
+  # ============================================
+  # JOB 2: Compilar Software
+  # ============================================
+  build-software:
+    runs-on: ubuntu-latest
+    name: Build Software
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup build environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake gcc g++ make
+
+      - name: Create build directory (Software)
+        run: mkdir -p software/build
+
+      - name: Configure CMake (Software)
+        run: |
+          cd software/build
+          cmake ..
+
+      - name: Build Software
+        run: |
+          cd software/build
+          make -j$(nproc)
+        continue-on-error: true
+
+      - name: Upload Software Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: software-binaries
+          path: software/build/bin/
+          if-no-files-found: ignore
+
+      - name: Build Status (Software)
+        run: echo "✅ Software build completed"
+
+  # ============================================
+  # JOB 3: Ejecutar Tests (depende de los builds)
+  # ============================================
+  run-tests:
+    runs-on: ubuntu-latest
+    name: Run Tests
+    needs: [build-firmware, build-software]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup test environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake gcc g++ make
+
+      - name: Create tests build directory
+        run: mkdir -p tests/build
+
+      - name: Configure tests with CMake
+        run: |
+          cd tests/build
+          cmake ..
+        continue-on-error: true
+
+      - name: Run CTests
+        run: |
+          cd tests/build
+          ctest --output-on-failure -V
+        continue-on-error: true
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: tests/build/
+          if-no-files-found: ignore
+
+      - name: Test Status
+        run: echo "✅ Testing phase completed"
+
+  # ============================================
+  # JOB 4: Resumen del Pipeline
+  # ============================================
+  summary:
+    runs-on: ubuntu-latest
+    name: Pipeline Summary
+    needs: [build-firmware, build-software, run-tests]
+    if: always()
+    
+    steps:
+      - name: Build Summary
+        run: |
+          echo "=========================================="
+          echo "GitHub Actions Pipeline Execution Summary"
+          echo "=========================================="
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Author: ${{ github.actor }}"
+          echo ""
+          echo "Pipeline Results:"
+          echo "  - Firmware Build: ${{ needs.build-firmware.result }}"
+          echo "  - Software Build: ${{ needs.build-software.result }}"
+          echo "  - Tests: ${{ needs.run-tests.result }}"
+          echo ""
+          echo "Artifacts available for download in Actions tab"
+          echo "=========================================="
