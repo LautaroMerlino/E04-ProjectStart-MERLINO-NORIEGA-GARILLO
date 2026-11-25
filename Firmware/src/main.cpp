@@ -11,18 +11,18 @@ int myFunction(int, int);
 
 void setup() {
   //init de MAQUINAS DE ESTADOS Keypad
-  initKeyboard();
+  //initKeyboard();
   //init de MEF de menu
-  initMenu();
+  //initMenu();
 
   uartInit();
 }
 
 void loop() {
   //actualizacion de MEF de teclado
-  char button = updateKeyboard();
+  //char button = updateKeyboard();
   //actualizacion de MEF de menu
-  updateMenu(button);
+  //updateMenu(button);
 
   uartRead();
 

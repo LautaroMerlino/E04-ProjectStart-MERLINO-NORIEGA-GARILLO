@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "..\include\uart.h"
-#include "..\inc\SensorHumedad.h"
+#include "..\include\SensorHumedad.h"
+#include "..\include\SensorTemperatura.h"
 
 #define BAUD_RATE 9600
 

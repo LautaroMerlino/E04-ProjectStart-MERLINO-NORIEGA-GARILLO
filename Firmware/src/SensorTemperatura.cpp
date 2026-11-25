@@ -1,5 +1,5 @@
 #include "SensorTemperatura.h"
-#define pin_PWM 13
+#define PIN_PWM 13
 #define PWM_CHANNEL 0
 #define PWM_FREQUENCY 5000
 #define PWM_RESOLUTION 8
