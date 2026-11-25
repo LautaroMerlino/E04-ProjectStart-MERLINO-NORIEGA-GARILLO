@@ -11,5 +11,7 @@
 void sensorTemperaturaInit(void);
 float sensorTemperaturaLeer(void);
 void sensorTemperaturaEnviar(float temperatura);
+float sensorHumedadLeer(void);
+void sensorHumedadEnviar(float humedad);
 
 #endif
