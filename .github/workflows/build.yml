@@ -3,9 +3,9 @@ name: Build and Test Firmware & Software
 # Triggers del workflow
 on:
   push:
-    branches: [ develop, main ]
+    branches: [ develop, main, Development ]
   pull_request:
-    branches: [ develop, main ]
+    branches: [ develop, main, Development ]
 
 jobs:
   # ============================================
@@ -29,24 +29,24 @@ jobs:
           # sudo apt-get install -y gcc-arm-none-eabi
 
       - name: Create build directory (Firmware)
-        run: mkdir -p firmware/build
+        run: mkdir -p Firmware/build
 
       - name: Configure CMake (Firmware)
         run: |
-          cd firmware/build
+          cd Firmware/build
           cmake ..
 
       - name: Build Firmware
         run: |
-          cd firmware/build
+          cd Firmware/build
           make -j$(nproc)
         continue-on-error: true
 
       - name: Upload Firmware Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: firmware-binaries
-          path: firmware/build/bin/
+          path: Firmware/build/bin/
           if-no-files-found: ignore
 
       - name: Build Status (Firmware)
@@ -71,24 +71,24 @@ jobs:
           sudo apt-get install -y cmake gcc g++ make
 
       - name: Create build directory (Software)
-        run: mkdir -p software/build
+        run: mkdir -p SoftwareC/build
 
       - name: Configure CMake (Software)
         run: |
-          cd software/build
+          cd SoftwareC/build
           cmake ..
 
       - name: Build Software
         run: |
-          cd software/build
+          cd SoftwareC/build
           make -j$(nproc)
         continue-on-error: true
 
       - name: Upload Software Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: software-binaries
-          path: software/build/bin/
+          path: SoftwareC/build/bin/
           if-no-files-found: ignore
 
       - name: Build Status (Software)
@@ -129,7 +129,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload Test Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: tests/build/
