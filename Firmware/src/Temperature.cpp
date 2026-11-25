@@ -1,5 +1,6 @@
 #include "../include/Temperature.h"
 
+int motorPin;
 int temperatureSensorpin = A0; // Pin connected to the temperature sensor
 
 void initTemperatureSensor(int pin) {

@@ -3,6 +3,7 @@
 #include "..\include\menu.h"
 #include "..\include\uart.h"
 #include "..\include\SensorHumedad.h"
+#include "..\include\SensorTemperatura.h"
 
 
 
@@ -11,29 +12,37 @@ int myFunction(int, int);
 
 void setup() {
   //init de MAQUINAS DE ESTADOS Keypad
-  initKeyboard();
+  //initKeyboard();
   //init de MEF de menu
-  initMenu();
+  //initMenu();
 
   uartInit();
+  sensorTemperaturaInit(); // DHT11 + salida PWM de temperatura
+  SensorHInit();           // salida PWM de humedad
 }
 
 void loop() {
   //actualizacion de MEF de teclado
-  char button = updateKeyboard();
+  //char button = updateKeyboard();
   //actualizacion de MEF de menu
-  updateMenu(button);
+  //updateMenu(button);
 
   uartRead();
 
-  float humidityVoltage = SensorHRead();
-  Serial.println(humidityVoltage);
-  PWMWrite(humidityVoltage);
+  // Cada TIEMPO_LECTURA ms se mide con el DHT11 y se actualizan las dos salidas PWM
+  static unsigned long ultimaLectura = 0;
+  if (millis() - ultimaLectura >= TIEMPO_LECTURA) {
+    ultimaLectura = millis();
+    sensorTemperaturaLeer();            // actualiza el PWM de temperatura
+    float humedad = SensorHRead();
+    if (humedad >= 0) {
+      PWMWrite(humedad);                // actualiza el PWM de humedad
+    }
+  }
   //otras actividades no bloqueantes
   delay(1);
 }
 
-// put function definitions here:
 int myFunction(int x, int y) {
   return x + y;
 }

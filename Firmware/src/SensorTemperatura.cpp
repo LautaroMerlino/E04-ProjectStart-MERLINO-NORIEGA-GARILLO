@@ -1,5 +1,5 @@
 #include "SensorTemperatura.h"
-#define pin_PWM 13
+#define PIN_PWM 13
 #define PWM_CHANNEL 0
 #define PWM_FREQUENCY 5000
 #define PWM_RESOLUTION 8
@@ -15,16 +15,28 @@ void sensorTemperaturaInit(void) {
 float sensorTemperaturaLeer(void) {
     float temperatura = dht.readTemperature();
     if (isnan(temperatura)) {
-        Serial.println("Error al leer la temperatura del sensor DHT11");
-        return -1.0; // Indicar error
+        return -1.0; // Indicar error (el mensaje ERROR lo envia uart.cpp)
     }
-int pwmValue = map(temperatura, 0, 50, 0, 255); // Mapear la temperatura a un valor PWM
-    ledcWrite(PWM_CHANNEL, pwmValue); // Ajustar el valor PWM según la temperatura leída
+    // PWM proporcional a la temperatura: 0 a 50 C -> 0 a 255
+    int pwmValue = (int)(constrain(temperatura, 0.0, 50.0) * 255.0 / 50.0 + 0.5);
+    ledcWrite(PWM_CHANNEL, pwmValue); // Ajustar el valor PWM segun la temperatura leida
     return temperatura;
 }
 
 void sensorTemperaturaEnviar(float temperatura) {
-    Serial.print("Temperatura: ");
-    Serial.print(temperatura);
-    Serial.println(" °C");
+    Serial.print("T:");
+    Serial.println(temperatura, 1);
+}
+
+float sensorHumedadLeer(void) {
+    float humedad = dht.readHumidity(); // % de humedad relativa del mismo DHT11
+    if (isnan(humedad)) {
+        return -1.0; // Indicar error
+    }
+    return humedad;
+}
+
+void sensorHumedadEnviar(float humedad) {
+    Serial.print("H:");
+    Serial.println(humedad, 1);
 }
