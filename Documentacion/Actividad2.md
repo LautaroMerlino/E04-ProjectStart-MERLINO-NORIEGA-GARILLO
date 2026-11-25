@@ -14,3 +14,9 @@ El objetivo es implementar máquinas de estado tanto en el software como en el f
 7- Una vez finalizada su parte, cada desarrollador deberá realizar commit (poner como mensaje E05-FiniteMachineState Dev1 2 o 3 según corresponda) e integrar sus cambios en la rama develop.
 8- Hacer los ajustes necesarios para que quede correctamente funcionando el firmware, de tal forma que lo ingresado por teclado permita manejar el menú de usuario.
 9- Publicar cambios (push)
+
+Diagramas integrados para las máquinas de estados del Firmware:
+
+- Dev-2, teclado matricial 4x4: [stateMachine_keyboard_dev2.png](./stateMachine_keyboard_dev2.png)
+- Dev-3, menú del Firmware: [stateMachine_menu_dev3.png](./stateMachine_menu_dev3.png)
+- Descripción, asignación de pines y casos de prueba: [StateMachines.md](./StateMachines.md)
