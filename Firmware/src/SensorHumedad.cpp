@@ -1,14 +1,14 @@
 #include <math.h>
 #include <Arduino.h>
-#include "..\inc\SensorHumedad.h"
+#include "..\include\SensorHumedad.h"
 
 #define ADC_PIN 34 // Pin analógico para el sensor de humedad
 #define PWM_PIN 38 // Pin PWM simulacion analogico
 #define SENS_DELAY 1000 // tiempo entre lecturas
 
-float voltValue
-const float acdMax = 4095.0 // Valor máximo del ADC (12 bits)
-const float vcc = 3.3 // Voltaje de referencia del ADC
+float voltValue;
+const float acdMax = 4095.0; // Valor máximo del ADC (12 bits)
+const float vcc = 3.3; // Voltaje de referencia del ADC
 
 void SensorHInit(void){
   Serial.begin(115200);

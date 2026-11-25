@@ -2,10 +2,8 @@
 #define TEMPERATURE_H
 #include <Arduino.h>
 
-void initTemperatureSensor(int pin); {
-    temperatureSensorpin = pin; // Initialize the pin for the temperature sensor
-}
+void initTemperatureSensor(int pin);
+void initMotor(int pin);
+float readTemperature();
 
-float readTemperature(); {
-
-}
+#endif
