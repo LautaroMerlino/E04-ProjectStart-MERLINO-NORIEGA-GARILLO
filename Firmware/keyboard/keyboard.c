@@ -11,6 +11,7 @@
  */
 
 #include "keyboard.h"
+#include <stddef.h>
 
 /* ============================================
  * CONFIGURATION CONSTANTS
