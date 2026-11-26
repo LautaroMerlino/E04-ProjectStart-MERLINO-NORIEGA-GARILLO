@@ -1,8 +1,7 @@
 # E04 - Proyecto de máquinas de estados
 
-Aplicación de consola en C y firmware para explorar máquinas de estados en un
-sistema con teclado y sensores. El proyecto contiene la máquina de estados del
-menú del software y componentes para comunicación serie con el firmware.
+Aplicación de consola en C, interfaz gráfica en Python y firmware para explorar
+máquinas de estados en un sistema con teclado y sensores.
 
 ## SoftwareC
 
@@ -58,3 +57,44 @@ Ejecuta `GES.exe` dentro de `SoftwareC/build`; la ruta exacta puede incluir una
 subcarpeta de configuración como `Debug`, según el generador de CMake elegido.
 Para compilar con CMake es posible seleccionar explícitamente un generador y
 un compilador con las opciones habituales de CMake.
+
+## Interfaz gráfica (PC)
+
+Programa en Python (tkinter + pyserial) que reemplaza al menú de consola de SoftwareC.
+
+Funciones:
+- Lectura de temperatura y humedad cada 1 s (comando `S`).
+- Botones para encender y apagar el LED (comandos `E` y `A`).
+- Sección "Datos de usuario".
+
+Cómo ejecutarla:
+
+    pip install pyserial
+    python SoftwareC\Interfaz\interfaz.py
+
+Elegir el puerto COM del conector UART de la placa y presionar "Conectar".
+Solo un programa puede usar el puerto a la vez (cerrar el monitor serie antes).
+
+## Protocolo serie (9600 8N1)
+
+| Comando | Respuesta |
+|---------|-----------|
+| `E`     | `OK` (enciende el LED) |
+| `A`     | `OK` (apaga el LED) |
+| `T`     | `T:24.0` |
+| `H`     | `H:55.0` |
+| `S`     | `T:24.0;H:55.0` |
+| otro / falla del sensor | `ERROR` |
+
+## Pines (ESP32-S3-DevKitC-1)
+
+| Función | GPIO |
+|---------|------|
+| DHT11 (señal) | 15 |
+| PWM temperatura (0–50 °C → 0–255) | 13 |
+| PWM humedad (0–100 % → 0–255) | 38 |
+| Teclado, filas | 4, 5, 6, 7 |
+| Teclado, columnas | 8, 9, 10, 11 |
+| LED integrado | 48 |
+
+El DHT11 se alimenta con 3V3 y GND de la placa.
