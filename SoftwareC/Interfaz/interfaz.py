@@ -11,10 +11,9 @@ from serial.tools import list_ports
 BAUDRATE = 9600
 READ_INTERVAL_MS = 1000
 
-# Editá este texto con los datos del grupo (integrantes, materia, etc.)
 USER_INFO = (
     "UTN FRSFCO - Informática II\n\n"
-    "Integrantes: (completar)\n"
+    "Integrantes: Merlino, Noriega, Garillo\n"
     "Placa: ESP32-S3 - Sensor: DHT11"
 )
 
@@ -354,7 +353,6 @@ class SensorMonitor:
             self.window.after(100, self.process_queue)
 
     def send_command(self, command):
-        # Los botones solo encolan; el hilo del puerto es el unico que escribe
         self.command_queue.put(command)
 
     def process_commands(self, port):
