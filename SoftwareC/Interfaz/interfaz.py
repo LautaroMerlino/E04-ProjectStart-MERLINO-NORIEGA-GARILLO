@@ -13,7 +13,7 @@ READ_INTERVAL_MS = 1000
 
 USER_INFO = (
     "UTN FRSFCO - Informática II\n\n"
-    "Integrantes: Merlino, Noriega, Garillo\n"
+    "Integrantes: Merlino, Noriega\n"
     "Placa: ESP32-S3 - Sensor: DHT11"
 )
 
