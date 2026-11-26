@@ -1,7 +1,7 @@
 #include <math.h>
 #include <Arduino.h>
-#include "..\include\SensorHumedad.h"
-#include "..\include\SensorTemperatura.h"
+#include "SensorHumedad.h"
+#include "SensorTemperatura.h"
 
 #define PWM_PIN 38 // Pin PWM simulacion analogico
 #define PWM_CHANNEL 1 // Canal distinto del de la temperatura (que usa el 0)
