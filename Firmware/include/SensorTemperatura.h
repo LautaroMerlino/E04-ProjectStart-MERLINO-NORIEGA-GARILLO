@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <DHT.h>
 
-#define PIN_SENSOR_TEMP 2
+#define PIN_SENSOR_TEMP 15
 #define DHT_TYPE DHT11
 #define TIEMPO_LECTURA 1000 //ms
 
