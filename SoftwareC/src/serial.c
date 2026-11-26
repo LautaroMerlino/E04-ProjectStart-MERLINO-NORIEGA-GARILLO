@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "serial.h"
 
-#define PORT_NUMBER 0    // COM1
+#define PORT_NUMBER 3    // COM1
 #define BAUD_RATE   9600
 
 void serialInit(void) {
@@ -26,4 +26,9 @@ void serialReadAndPrint(void) {
         buf[n] = '\0';
         printf("Respuesta: %s\n", (char*)buf);
     }
+}
+
+void serialRequestSensor(void) {
+    serialSendCommand('L');
+    serialReadAndPrint();
 }

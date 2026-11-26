@@ -54,8 +54,6 @@ dkms.conf
 # debug information files
 *.dwo
 
-# Documentación local / archivos no versionables
-Documentacion/
 .github/copilot-instructions.md
 
 # PlatformIO

@@ -18,4 +18,3 @@ void menuUpdate(char letter){
 printf("la letra presionada fue %c", letter);
 }
 
-return 0;
